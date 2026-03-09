@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI PPT Toolkit | 会灵 AI 做 PPT 三件套</title>
+  <meta name="description" content="AI 做 PPT 三件套：NotebookLM × Gemini × Gamma。把资料整理、结构梳理、表达润色串成一个真正能跑通的工作流。" />
+  <style>
+    :root {
+      --bg: #f7f3ea;
+      --paper: #fffdf8;
+      --ink: #1f1f1f;
+      --sub: #5f5a52;
+      --line: #d9d0c3;
+      --accent: #1f1f1f;
+      --accent-2: #8f7a54;
+      --tag: #f1eadf;
+      --shadow: 0 12px 40px rgba(31, 31, 31, 0.08);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #f8f4eb 0%, #f3eee5 100%);
+      line-height: 1.6;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    .hero {
+      padding: 56px 0 24px;
+    }
+
+    .hero-card {
+      background: var(--paper);
+      border: 1.5px solid var(--line);
+      border-radius: 30px;
+      box-shadow: var(--shadow);
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .top-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--tag);
+      border: 1px solid var(--line);
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      color: var(--sub);
+      margin-bottom: 18px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: var(--accent-2);
+    }
+
+    h1 {
+      font-size: clamp(34px, 5vw, 64px);
+      line-height: 1.08;
+      margin: 0 0 14px;
+      letter-spacing: -0.03em;
+    }
+
+    .subtitle {
+      font-size: clamp(16px, 2vw, 21px);
+      color: var(--sub);
+      max-width: 760px;
+      margin-bottom: 24px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 22px;
+      margin-top: 26px;
+    }
+
+    .panel {
+      background: rgba(255,255,255,0.76);
+      border: 1.5px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 18px 0 14px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 13px 18px;
+      border-radius: 14px;
+      border: 1.5px solid var(--ink);
+      font-weight: 600;
+      transition: 0.2s ease;
+      cursor: pointer;
+      background: transparent;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn.primary {
+      background: var(--ink);
+      color: #fff;
+    }
+
+    .btn.soft {
+      background: #fff;
+      border-color: var(--line);
+    }
+
+    .mini {
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    .stack {
+      display: grid;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .stack-item {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .stack-item strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 16px;
+    }
+
+    .section {
+      padding: 18px 0 8px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      margin: 0 0 8px;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      color: var(--sub);
+      margin: 0 0 18px;
+    }
+
+    .cards-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1.5px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .num {
+      display: inline-flex;
+      width: 34px;
+      height: 34px;
+      align-items: center;
+      justify-content: center;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--tag);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 0;
+      color: var(--sub);
+    }
+
+    .demo {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .demo-box {
+      background: var(--paper);
+      border: 1.5px solid var(--line);
+      border-radius: 22px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+
+    label {
+      font-size: 14px;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 180px;
+      border-radius: 16px;
+      border: 1.5px solid var(--line);
+      padding: 16px;
+      font: inherit;
+      resize: vertical;
+      background: #fff;
+      outline: none;
+    }
+
+    textarea:focus {
+      border-color: var(--accent-2);
+      box-shadow: 0 0 0 4px rgba(143,122,84,0.12);
+    }
+
+    .tips {
+      margin-top: 14px;
+      padding: 14px 16px;
+      border: 1px dashed var(--line);
+      border-radius: 16px;
+      background: #fff;
+      color: var(--sub);
+      font-size: 14px;
+    }
+
+    .footer {
+      padding: 28px 0 56px;
+      color: var(--sub);
+      font-size: 14px;
+    }
+
+    .footer-card {
+      background: var(--paper);
+      border: 1.5px solid var(--line);
+      border-radius: 22px;
+      padding: 18px 20px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .badge-row {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 14px;
+    }
+
+    .badge {
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: var(--tag);
+      border: 1px solid var(--line);
+      font-size: 13px;
+      color: var(--sub);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .cards-3,
+      .demo {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card { padding: 20px; }
+      .panel, .card, .demo-box { padding: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="hero-card">
+        <div class="top-note"><span class="dot"></span> 会灵 AI 做 PPT 三件套 · Workflow Demo</div>
+        <h1>AI PPT Toolkit</h1>
+        <div class="subtitle">
+          把 <strong>NotebookLM × Gemini × Gamma</strong> 串成一个真正能跑通的汇报工作流：先吃透资料，再梳理结构，最后生成可讲、可改、可汇报的 PPT。
+        </div>
+
+        <div class="cta-row">
+          <a class="btn primary" href="https://github.com" target="_blank" rel="noreferrer">查看 GitHub</a>
+          <a class="btn soft" href="#demo">体验 Demo</a>
+          <button class="btn soft" onclick="copyPrompt()">复制 Prompt 模板</button>
+        </div>
+        <div class="mini">提示：先把 GitHub 按钮链接替换成你自己的仓库地址，再重新部署。</div>
+
+        <div class="badge-row">
+          <div class="badge">结构替代效率</div>
+          <div class="badge">AI 工作流产品化</div>
+          <div class="badge">适合方案汇报 / CEO 汇报 / 项目复盘</div>
+        </div>
+
+        <div class="hero-grid">
+          <div class="panel">
+            <div class="section-title" style="font-size:24px;margin-bottom:8px;">为什么不是“一个 AI 全包”？</div>
+            <div class="section-desc">因为不同模型擅长的环节不一样。真正高质量的结果，往往来自“分工明确”的组合，而不是把所有任务都丢给同一个模型。</div>
+            <div class="stack">
+              <div class="stack-item">
+                <strong>01 · NotebookLM</strong>
+                吃透原始资料，抽取重点，建立事实底座。
+              </div>
+              <div class="stack-item">
+                <strong>02 · Gemini</strong>
+                把事实梳成结构，把表达压缩成能讲清楚的语言。
+              </div>
+              <div class="stack-item">
+                <strong>03 · Gamma</strong>
+                快速生成页面化呈现，方便继续改、继续讲、继续汇报。
+              </div>
+            </div>
+          </div>
+
+          <div class="panel">
+            <div class="section-title" style="font-size:24px;margin-bottom:8px;">这个页面现在能做什么？</div>
+            <div class="section-desc">这是一个轻量版演示页，方便你对外展示工作流逻辑、引导用户去 GitHub、领取资料或体验 Demo。</div>
+            <div class="stack">
+              <div class="stack-item">
+                <strong>可展示</strong>
+                适合放在小红书 / B站 / 视频号简介里作为外部入口。
+              </div>
+              <div class="stack-item">
+                <strong>可引流</strong>
+                你可以把 Prompt、SOP、资料领取入口统一到这个页面。
+              </div>
+              <div class="stack-item">
+                <strong>可升级</strong>
+                未来可继续接入表单、自动生成 outline、API 或下载区。
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">三步跑通 AI 做 PPT</h2>
+      <p class="section-desc">不是“会不会用工具”的问题，而是“有没有一套可以重复使用的流程”。</p>
+      <div class="cards-3">
+        <div class="card">
+          <div class="num">1</div>
+          <h3>资料喂给 NotebookLM</h3>
+          <p>把会议纪要、访谈记录、方案材料、网页、PDF 全部喂进去，让 AI 先理解你手上的材料，而不是直接开始写 PPT。</p>
+        </div>
+        <div class="card">
+          <div class="num">2</div>
+          <h3>用 Gemini 逼出结构</h3>
+          <p>基于事实材料，让 Gemini 帮你做结构提炼、逻辑排序、标题收束和表达润色，得到可以直接用于汇报的大纲。</p>
+        </div>
+        <div class="card">
+          <div class="num">3</div>
+          <h3>用 Gamma 快速呈现</h3>
+          <p>把大纲粘进去，快速生成页面，再根据真实业务场景做二次修改，而不是从零开始一页页排版。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="demo">
+      <h2 class="section-title">体验一个轻量 Demo</h2>
+      <p class="section-desc">输入一个主题，页面会帮你生成一版简化的 PPT 结构示例。这个 Demo 是前端静态演示，不调用任何真实 AI 接口。</p>
+      <div class="demo">
+        <div class="demo-box">
+          <label for="topic">输入你的主题</label>
+          <textarea id="topic" placeholder="例如：
+1. 子公司新财年业务规划汇报
+2. AI 在 HR 招聘流程中的落地方案
+3. 中国剪纸数字文化产品 Demo 方案"></textarea>
+          <div class="cta-row" style="margin-top:14px;">
+            <button class="btn primary" onclick="generateOutline()">生成示例大纲</button>
+            <button class="btn soft" onclick="fillExample()">填入示例</button>
+            <button class="btn soft" onclick="clearAllText()">清空</button>
+          </div>
+          <div class="tips">
+            你后面如果要升级成真正可交互的网站，可以把这里接到表单、数据库，或者 API。
+          </div>
+        </div>
+
+        <div class="demo-box">
+          <label for="result">示例输出</label>
+          <textarea id="result" readonly placeholder="点击“生成示例大纲”后，这里会出现一版可直接拿去继续加工的 PPT 结构。"></textarea>
+          <div class="cta-row" style="margin-top:14px;">
+            <button class="btn soft" onclick="copyResult()">复制结果</button>
+          </div>
+          <div class="tips">
+            这个结果只是演示“结构感”。真正高质量版本，建议仍然回到 NotebookLM / Gemini / Gamma 三件套去跑。
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">适合哪些场景</h2>
+      <p class="section-desc">尤其适合你现在在做的这类“复杂信息 → 结构表达 → 汇报输出”的高价值任务。</p>
+      <div class="cards-3">
+        <div class="card">
+          <h3>管理层汇报</h3>
+          <p>新财年规划、组织变革、业务复盘、专项项目汇报。</p>
+        </div>
+        <div class="card">
+          <h3>咨询与方案</h3>
+          <p>客户提案、解决方案设计、培训课件、项目宣讲材料。</p>
+        </div>
+        <div class="card">
+          <h3>内容产品化</h3>
+          <p>把你的视频、方法论、Prompt、SOP 统一沉淀成一个可复用的外部展示入口。</p>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="footer-card">
+        <div>
+          <strong>AI PPT Toolkit</strong><br />
+          一个把 AI 做 PPT 三件套产品化的轻量演示页。
+        </div>
+        <div>Built for 会灵 / wiling 的 AI 工作流产品化实验</div>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    function fillExample() {
+      document.getElementById('topic').value = '子公司新财年业务规划汇报：需要在1小时内向中国区负责人汇报业务规划，其中有一页要从HR视角讲团队变革、碳硅融合、内部协作效率重塑。';
+    }
+
+    function clearAllText() {
+      document.getElementById('topic').value = '';
+      document.getElementById('result').value = '';
+    }
+
+    function generateOutline() {
+      const topic = document.getElementById('topic').value.trim();
+      const result = document.getElementById('result');
+
+      if (!topic) {
+        result.value = '请先输入一个主题。';
+        return;
+      }
+
+      result.value = `主题：${topic}\n\nP1｜为什么现在必须讲这件事\n- 业务背景与变化信号\n- 为什么这件事不能再往后拖\n- 对管理层的决策意义\n\nP2｜当前现状与关键问题\n- 现状扫描：已发生了什么\n- 最大瓶颈：效率、协同、能力或资源\n- 如果不解决，会带来什么风险\n\nP3｜核心判断与策略主线\n- 这件事最重要的底层判断是什么\n- 我们建议聚焦哪3个关键抓手\n- 每个抓手分别解决什么问题\n\nP4｜执行路径与阶段节奏\n- 第一阶段：先解决什么\n- 第二阶段：再推进什么\n- 第三阶段：如何形成机制\n\nP5｜资源诉求与下一步动作\n- 需要什么资源支持\n- 需要谁参与协同\n- 会后立即推进的3个动作\n\n建议补充给 NotebookLM 的材料：\n- 会议纪要 / 访谈记录\n- 内部汇报文档 / 业务数据\n- 组织结构 / 项目背景资料\n\n建议补充给 Gemini 的指令：\n- 请基于以上材料，压缩成适合管理层汇报的5页PPT结构，每页控制在1个核心结论 + 3个关键要点。\n\n建议交给 Gamma 的内容：\n- 直接复制以上5页结构，生成16:9汇报型PPT初稿。`;
+    }
+
+    async function copyResult() {
+      const text = document.getElementById('result').value;
+      if (!text) return;
+      await navigator.clipboard.writeText(text);
+      alert('结果已复制。');
+    }
+
+    async function copyPrompt() {
+      const prompt = `请你作为企业级汇报结构顾问，基于我提供的资料，输出一版适合管理层汇报的PPT结构。要求：\n1. 先提炼事实与核心矛盾\n2. 再压缩成5页以内的结构\n3. 每页给出标题 + 核心结论 + 3个要点\n4. 语言简洁、克制、有汇报感\n5. 适合后续直接粘贴到 Gamma 生成 PPT`; 
+      await navigator.clipboard.writeText(prompt);
+      alert('Prompt 已复制。');
+    }
+  </script>
+</body>
+</html>
