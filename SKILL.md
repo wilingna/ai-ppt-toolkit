@@ -1,10 +1,17 @@
 ---
 name: ai-ppt-toolkit
-description: >
-  使用 NotebookLM + Gemini + Gamma "三件套"将零散资料快速转化为高质量 PPT 的完整工作流。
-  当用户需要制作职场汇报 PPT、演示文稿，或提到"做 PPT"、"汇报"、"演示"、"NotebookLM"、"Gamma"、"三件套"时，务必触发此 skill。
-  适用于：老板临时交办汇报任务、会议素材整理、行业分析演示、HR/管理层汇报等场景。
-  即使用户只说"帮我准备个汇报"或"资料很乱不知道怎么整理"，也应主动推荐此流程。
+description: "NotebookLM + Gemini + Gamma workflow to transform scattered materials into high-quality presentations. Use when the user needs to create workplace reports, presentations, or mentions PPT/做PPT/汇报/演示/NotebookLM/Gamma/三件套. Even 'help me prepare a report' or 'my materials are scattered' should trigger this."
+user-invocable: true
+triggers:
+  - 做PPT
+  - 帮我做汇报
+  - make a presentation
+  - create PPT slides
+  - 制作演示文稿
+  - 汇报材料整理
+  - help me prepare a report
+  - PPT三件套
+  - NotebookLM Gamma workflow
 ---
 
 # AI 做 PPT 三件套完整工作流
