@@ -21,6 +21,8 @@ http://xhslink.com/o/20J1E1g4i01 复制后打开【小红书】查看笔记！
 
 ## 快速开始
 
+[点击在线体验](https://socialistic.ai/ai-ppt-toolkit-b14cc6?utm_source=github_readme&utm_campaign=koc_skill_creator&utm_content=hyperlink)
+
 ### 安装 Skill（Claude Desktop / Claude Web 用户）
 
 1. 下载 `ai-ppt-toolkit.skill` 文件
