@@ -1,284 +1,215 @@
 <div align="center">
 
-# ⚡ AI-PPT-Web
+# 🎯 AI 做 PPT 三件套工作流 Skill
 
-### One web page replaces NotebookLM + Gemini. Paste notes → get Gamma-ready markdown.
-### 一个网页替掉 NotebookLM 和 Gemini，粘资料 → 直接拿到 Gamma 能用的 Markdown
-
-**No login chains. No tab-switching. Same proven 3-tool methodology — minus 2 tools.**
-**不用三个账号轮流登录，不用三个标签页来回切。同一套已验证的方法论，少两个工具。**
+### NotebookLM + Gemini + Gamma —— 从乱资料到高质量汇报的完整流程
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![Live App](https://img.shields.io/badge/app-live-brightgreen)](https://wilingna.github.io/ai-ppt-web/)
-[![Based on](https://img.shields.io/badge/methodology-300k%2B%20views-red)](https://github.com/wilingna/ai-ppt-toolkit)
-[![No Build](https://img.shields.io/badge/build-zero%20config-blue)](https://github.com/wilingna/ai-ppt-web)
-[![Stars](https://img.shields.io/github/stars/wilingna/ai-ppt-web?style=social)](https://github.com/wilingna/ai-ppt-web)
+[![Claude Skill](https://img.shields.io/badge/Claude-Skill-orange.svg)](https://claude.ai/)
+[![小红书播放量](https://img.shields.io/badge/小红书播放量-300k%2B-red.svg)](http://xhslink.com/o/20J1E1g4i01)
+[![Stars](https://img.shields.io/github/stars/wilingna/ai-ppt-toolkit?style=social)](https://github.com/wilingna/ai-ppt-toolkit)
 
-[**🔗 Open the App**](https://wilingna.github.io/ai-ppt-web/) · [English](#english) · [中文](#中文) · [Quick Start](#-quick-start) · [The Story](#-the-story--方法论演进)
+[小红书原文](http://xhslink.com/o/20J1E1g4i01) · [English TL;DR](#english-tldr) · [快速开始](#快速开始) · [Claude Code 用户指南](#-claude-code-用户使用指南)
 
 </div>
 
 ---
 
-## 🎯 TL;DR
+<a name="english-tldr"></a>
+> **🌍 English TL;DR** — A Claude Skill that codifies the most validated workflow for "AI-powered slides" in the Chinese-speaking productivity community (300k+ views on Xiaohongshu): **NotebookLM** digests messy multi-source notes into a spine, **Gemini** rewrites for human voice (strips the "AI smell"), **Gamma** turns the polished markdown into a deck. Three tools, one job each — because no single AI does all three well. Install as a Claude Skill, or use the prompts directly.
 
-**EN** — `ai-ppt-web` is the web-based upgrade of [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) (300k+ views, 51⭐) — a methodology validated by tens of thousands of Chinese knowledge workers. Claude replaces the NotebookLM + Gemini steps in one page. You paste messy multi-source notes, you get polished Gamma-ready markdown. Then one paste into Gamma → done.
+---
 
-**中文** — 本工具是 [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit)（30 万+ 播放、51 颗星）这套方法论的**网页版升级**。Claude 在一个网页里替掉了 NotebookLM 和 Gemini 两步——粘乱资料进去，拿出 Gamma 能直接用的 Markdown，再粘一次到 Gamma 就完成了。
+## 这是什么？
+
+这是一个专为职场人设计的 **Claude Skill**，封装了"AI 三件套"制作 PPT 的完整工作流——
+
+**三个工具，各司其职：**
+
+| 工具 | 做什么 | 为什么用它 |
+|------|--------|-----------|
+| **NotebookLM** | 从乱资料提炼结构 | 最擅长"消化"多来源信息，找出主线 |
+| **Gemini** | 升级表达，去 AI 味 | 让内容听起来像"企业里的人说的话" |
+| **Gamma** | 一键生成可交付 PPT | 视觉呈现，无需手动排版 |
+
+---
+
+## 快速开始
+
+### 安装 Skill（Claude Desktop / Claude Web 用户）
+
+1. 下载 `ai-ppt-toolkit.skill` 文件
+2. 在 Claude 的 Skill 设置中上传安装
+3. 开始对话时提到"做 PPT"、"汇报"、"三件套"等关键词，Skill 会自动触发
+
+### 直接使用 Prompt 模板
+
+如果你不使用 Skill 系统，可以直接复制 `SKILL.md` 中的两个 Prompt 模板：
+- **NotebookLM Prompt**：用于结构设计
+- **Gemini Prompt**：用于表达升级
+
+---
+
+## 适用场景
+
+- 📊 老板临时交办的管理层汇报
+- 🏢 部门工作总结/年度汇报
+- 📈 行业分析演示
+- 🎓 培训/分享课件制作
+- 💡 任何"资料很杂、时间很紧"的 PPT 任务
+
+---
+
+## 文件结构
 
 ```
-Before · 之前:  Notes → NotebookLM → Gemini → Gamma   (3 tools, 3 logins)
-After  · 现在:  Notes → ai-ppt-web → Gamma            (1 page + Gamma)
+ai-ppt-toolkit/
+├── SKILL.md                    # 主 Skill 文件（包含完整 Prompt 模板）
+├── .claude/
+│   └── commands/
+│       └── ppt-workflow.md     # Claude Code 自定义命令（内容同 SKILL.md）
+├── references/
+│   └── example-hr-ai-case.md  # 完整案例参考（HR+AI 汇报示例）
+└── README.md                   # 本文件
 ```
 
 ---
 
-<a name="english"></a>
-## 🌍 English
+## 核心理念
 
-### "Why not just use Gamma directly?"
+> 真正难的从来不是 PPT 做不出来，而是你了解每个 AI 工具都擅长什么，以及你到底该怎么问 AI，它才会真的帮到你。
 
-Because Gamma is excellent at *visuals* and bad at *thinking*. Drop a messy pile of meeting notes into Gamma and you get pretty slides with fluffy AI-flavored text. The hard part of slide-making isn't the layout — it's:
-
-1. Figuring out what your audience actually cares about
-2. Picking the spine of the story
-3. Writing in a voice that sounds like a *human at your company*, not GPT
-
-`ai-ppt-web` does that **before** Gamma sees a single word. Gamma stays in its lane (visuals); Claude handles the thinking.
-
-### What you get
-
-- **Step 1 output**: A spine — what to say, what to cut, what your audience is really listening for
-- **Step 2 output**: Gamma-ready markdown — punchy headlines (no more "现状分析" / "Current Situation"), human voice, anti-AI-cliché filtering
-- **Tool count**: 1 web page + Gamma
-- **Cost**: ~$0.05–$0.10 per full run via OpenRouter
-- **Privacy**: API key stays in your browser. No PPTFlux server in the request chain.
+AI 做 PPT 的关键，从来不是"哪个工具更强"，而是**有没有擅用每个 AI 所长，然后把 Prompt 用在正确的位置**。
 
 ---
 
-<a name="中文"></a>
-## 🇨🇳 中文
+## 🤖 Claude Code 用户使用指南
 
-### "为什么不直接用 Gamma？"
+本 Skill 原为 Claude Desktop / Claude Web 的 Skills 功能设计。
+Claude Code 目前没有内置 Skills 面板，以下是两种调用方式。
 
-因为 Gamma 强在**视觉**，弱在**思考**。一堆乱资料丢进 Gamma，你会拿到一份"看着挺好看，但内容很 AI"的 PPT。做 PPT 真正难的不是排版，是：
+### 方式一：CLAUDE.md 引用（推荐新手）
 
-1. 想清楚你的听众真正关心什么
-2. 找到故事的主线
-3. 用"企业里的人说话"的口气写，不是 GPT 腔
-
-ai-ppt-web 在 Gamma 看到内容**之前**就把这些事做完了。Gamma 继续干它擅长的视觉，Claude 干思考的活。
-
-### 你能拿到什么
-
-- **Step 1 产出**：故事主线——讲什么、舍什么、听众真正在意什么
-- **Step 2 产出**：Gamma 直接能用的 Markdown——金句化标题（告别"现状分析""存在问题"）、有人味的表达、反 AI 套话过滤
-- **工具数量**：1 个网页 + Gamma
-- **费用**：完整一次约 $0.05-0.10（通过 OpenRouter）
-- **隐私**：API Key 只存本地浏览器，请求链路里没有任何中间服务器
-
----
-
-## ⚖️ ai-ppt-web vs Gamma-only vs ai-ppt-toolkit
-
-| | **Gamma 直接用** | **ai-ppt-toolkit**（三件套） | **ai-ppt-web**（本仓库） |
-|---|---|---|---|
-| 工具数 · Tools | 1 | 3 (NLM + Gemini + Gamma) | 1 web + Gamma |
-| 账号 · Accounts | 1 | 3 | OpenRouter only |
-| 思考质量 · Thinking | ⭐⭐ AI 套话多 | ⭐⭐⭐⭐⭐ 最深 | ⭐⭐⭐⭐ 接近三件套 |
-| 速度 · Speed | ⚡⚡⚡⚡⚡ | ⚡⚡ | ⚡⚡⚡⚡ |
-| 适合 · Best for | 临时凑个 deck | 想理解底层逻辑 | 日常快速产出高质量 |
-
-> **Picking guide · 选哪个**: First time? Read [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) to understand the methodology. Then come back here for daily use.
-> **选择建议**: 第一次接触？先去 [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) 学方法论。理解了之后回来用本工具日常提效。
-
----
-
-## 🚀 Quick Start
-
-### Option A — Use it online · 直接在线用（推荐）
-
-👉 **[wilingna.github.io/ai-ppt-web](https://wilingna.github.io/ai-ppt-web/)**
-
-### Option B — Run locally · 本地运行
+**适合：** 想在某个项目里长期使用这套流程
 
 ```bash
-git clone https://github.com/wilingna/ai-ppt-web
-cd ai-ppt-web
-open index.html   # macOS, or just double-click
+# 第 1 步：克隆仓库
+git clone https://github.com/你的用户名/你的仓库名.git
+
+# 第 2 步：进入你的工作目录
+cd 你的项目文件夹
+
+# 第 3 步：把 SKILL.md 复制为 CLAUDE.md
+cp /克隆仓库的路径/SKILL.md ./CLAUDE.md
+
+# 第 4 步：启动 Claude Code
+claude
 ```
 
-Single-file HTML. Vanilla JS. Zero build, zero dependencies.
-单文件 HTML，原生 JS，零构建零依赖。
-
-### Six steps to a deck · 六步成 deck
-
-#### 1️⃣ Get an OpenRouter API key · 准备 OpenRouter API Key
-
-- Sign up at [openrouter.ai](https://openrouter.ai/) (supports WeChat / Alipay) · 注册 [openrouter.ai](https://openrouter.ai/)（支持微信 / 支付宝充值）
-- Top up $5 — covers 50–100 runs · 充 $5 够用 50–100 次
-- Keys page → Create Key → copy · Keys 页面 → Create Key → 复制
-
-#### 2️⃣ Open the app, paste your key · 打开工具填 Key
-
-API key runs locally in your browser only. No third-party server.
-API Key 仅在本地浏览器使用，不经过任何第三方服务器。
-
-#### 3️⃣ Fill in topic, duration, audience · 填主题、时长、汇报对象
-
-#### 4️⃣ Upload or paste your raw notes · 上传或粘贴资料
-
-Supported formats · 支持格式:
-
-| Format | Note |
-|---|---|
-| 📄 PDF | ✅ |
-| 📝 Word `.docx` | ✅ |
-| 📊 Excel `.xlsx` / CSV | ✅ |
-| 🖼 Images PNG/JPG | ✅ |
-| 📃 TXT / Markdown | ✅ |
-| Just paste text | The messier, the better — Claude will sort it · 越乱越多越好 |
-
-#### 5️⃣ Step 1 — Generate the spine · 生成大纲
-
-Claude figures out:
-- What leadership actually cares about · 管理层真正关心什么
-- The narrative arc · 故事线怎么走
-- What to keep vs. cut · 哪些放、哪些舍
-
-#### 6️⃣ Step 2 — Generate the script · 生成演讲内容
-
-Claude produces:
-- Punchy headlines (no more "现状分析" / "Existing Issues") · 金句化标题
-- Scenario-grounded body copy · 场景化扩写
-- AI-smell stripped · 去 AI 味
-- **Gamma-formatted markdown** · 输出 Gamma 专用 Markdown
-
-#### 7️⃣ Paste into Gamma · 导入 Gamma
-
-1. Copy the markdown · 复制 Markdown
-2. [gamma.app](https://gamma.app) → paste · 打开 Gamma → 粘贴
-3. ⚠️ **Choose "Keep text as-is" (保持此文本原样)** — this is critical, otherwise Gamma rewrites and re-injects AI smell · 务必选「保持此文本原样」，否则 Gamma 会重写让 AI 味回来
-4. Generate, fine-tune visuals · 生成，微调视觉
+✅ Claude Code 会自动读取当前目录的 `CLAUDE.md`，三件套流程直接生效。
 
 ---
 
-## ❓ FAQ
+### 方式二：自定义命令（推荐进阶用户）
 
-<details>
-<summary><b>Q: Is my API key safe? · API Key 安全吗？</b></summary>
+**适合：** 想随时在任意项目里一条命令调用，不想每次复制文件
 
-Stored in your browser's localStorage only. Code is fully open-source — audit it yourself. Nothing in the request chain except OpenRouter.
-只存在你本地浏览器的 localStorage，代码完全开源可审计。请求链路里除了 OpenRouter 没有任何第三方。
+如果你直接 clone 本仓库，`.claude/commands/ppt-workflow.md` 已经内置，**无需任何额外操作**，直接启动 Claude Code 输入命令即可：
 
-</details>
+```
+/project:ppt-workflow
+```
 
-<details>
-<summary><b>Q: How much per run? · 一次多少钱？</b></summary>
+如果你想在自己的其他项目里使用：
 
-Step 1 + Step 2 combined ≈ **$0.05–$0.10**. A $5 OpenRouter top-up lasts 50–100 runs.
-Step 1 + Step 2 加起来约 **$0.05-0.10**，OpenRouter 充 $5 够用 50-100 次。
+```bash
+mkdir -p .claude/commands
+cp /克隆仓库的路径/SKILL.md .claude/commands/ppt-workflow.md
+```
 
-</details>
-
-<details>
-<summary><b>Q: Do I need a VPN? · 需要翻墙吗？</b></summary>
-
-OpenRouter is accessible from mainland China without a VPN.
-OpenRouter 国内可直连，无需翻墙。
-
-</details>
-
-<details>
-<summary><b>Q: Will the original toolkit be deprecated? · 三件套还能用吗？</b></summary>
-
-No. Both repos stay alive — they serve different purposes. Toolkit teaches the *why*, this teaches the *fast*.
-不会下架。两个仓库定位不同：toolkit 教"为什么"，本工具帮"更快"。
-
-</details>
-
-<details>
-<summary><b>Q: Why not auto-export to Gamma? · 为什么不自动导入 Gamma？</b></summary>
-
-Gamma has no public API. Manual paste is the only option for now — but it's literally one paste.
-Gamma 没有公开 API，只能手动粘贴——但也就一次粘贴的事。
-
-</details>
+✅ 输入 `/project:ppt-workflow` 后，Claude Code 立刻进入三件套工作流。
 
 ---
 
-## 📖 The Story · 方法论演进
+### 两种方式对比
 
-This repo is the middle child in a 3-stage evolution. If you're building "AI for slides" tools yourself, the path might resonate:
-本仓库是一段三阶段演进的中间站。如果你也在做"AI 做 PPT"，这条路径或许能给你启发：
-
-### 🥇 [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) — The Methodology · 方法论
-
-Three tools, three jobs. NotebookLM + Gemini + Gamma. **51 ⭐, 300k+ views on Xiaohongshu** — the most validated AI-slides workflow in the Chinese productivity community.
-三个工具各司其职。**51 颗星、小红书 30 万+ 播放**——华语生产力圈最被验证的 AI 做 PPT 工作流。
-
-### 🥈 **ai-ppt-web** (this repo) · 第一次合并
-
-Claude replaces the first two tools. Three tools collapsed into one web page + Gamma. Manual relay collapsed into auto-handoff. **You're here.**
-Claude 吃掉前两步。三个工具压成一个网页 + Gamma，手动接力变自动衔接。**你在这里。**
-
-### 🥉 [PPTFlux](https://github.com/wilingna/PPTFlux) — The Loop Closes · 闭环
-
-4 agents replace even Gamma. Outputs are interactive HTML decks with 6 design languages × 18 layouts, two layers of editability.
-4 Agent 连 Gamma 都吃掉了。产出是交互式 HTML 幻灯片，6 套设计 × 18 种排版，两层编辑权。
-
-> **toolkit teaches *why*. ai-ppt-web makes it *faster*. PPTFlux makes it *one-shot*.**
-> **toolkit 教你"为什么"，ai-ppt-web 让你"更快"，PPTFlux 让你"一气呵成"。**
+| | 方式一（CLAUDE.md） | 方式二（自定义命令） |
+|---|---|---|
+| 适合人群 | 新手 | 进阶用户 |
+| 作用范围 | 单个项目目录 | 任意项目 |
+| 调用方式 | 自动加载 | `/project:ppt-workflow` |
+| 灵活度 | ⭐⭐ | ⭐⭐⭐⭐ |
 
 ---
 
-## 🛠 Tech Stack
+### 使用时，把你的资料告诉 Claude
 
-- Single-file HTML + Vanilla JS — no build, no framework
-- OpenRouter API gateway — one key, all major models
-- Claude (recommended) for Step 1 + Step 2
-- Hosted on GitHub Pages — the entire app is one `index.html`
+启动后，把以下内容发给 Claude Code：
 
----
+```
+我需要做一个PPT汇报，资料如下：
 
-## 🤝 Contributing
+【老板需求】：...
+【会议纪要】：...
+【我的想法】：...
+【参考文章】：...
 
-Issues and PRs welcome — especially:
-- New file format support · 新文件格式支持
-- Better prompt templates for non-business scenarios · 非商业场景的 prompt 模板
-- UI/UX polish · 界面体验改进
+请按三件套流程帮我处理。
+```
 
----
-
-## 📜 License
-
-MIT — use it, fork it, ship it.
+Claude Code 会按照 NotebookLM → Gemini → Gamma 的逻辑，引导整个操作过程包括 prompt 的建议，输出可以直接用的结构大纲和 Markdown 格式内容。
 
 ---
 
-## 👋 About
+## 常见问题
 
-Built by **wilingna** ([@wilingna](https://github.com/wilingna))
-Big-tech HR turned AI Systems Architect. Building AI workflows and Chinese-aesthetic digital culture for global audiences.
-大厂 HR 出身的 AI Systems Architect，做 AI 工作流 / 中国传统美学数字文化出海。
+**Q：不是 HR，这套流程适用吗？**
+A：完全适用。只需替换 Prompt 中的角色描述（"HR 战略顾问" → 你的领域专家）即可。
 
-### My Other Projects · 其他项目
+**Q：必须三个工具都用吗？**
+A：不是。NotebookLM 是最核心的，Gemini 是锦上添花，Gamma 可以替换为其他 PPT 工具。
 
-| Repo | What it does |
-|---|---|
-| [ai-ppt-toolkit](https://github.com/wilingna/ai-ppt-toolkit) | The original 3-tool methodology · 三件套原版（51⭐）|
-| [PPTFlux](https://github.com/wilingna/PPTFlux) | 4-agent pipeline → interactive HTML decks · 4 Agent 闭环 |
-| [ai-decision-5steps](https://github.com/wilingna/ai-decision-5steps) | High-quality decisions in 5 AI-powered steps · 5 步 AI 决策 |
-| [ai-content-pipeline](https://github.com/wilingna/ai-content-pipeline) | 7-agent content production pipeline · 7 Agent 内容生产线 |
+**Q：Gemini 哪个版本？**
+A：推荐 Gemini 2.5 Pro，在去 AI 味和场景化扩写上效果最佳。
+
+**Q：Claude Code 和 Claude Desktop 的 Skills 是一样的吗？**
+A：不一样。Claude Desktop/Web 有内置 Skills 面板可以直接安装。Claude Code 目前没有这个系统，需要用上面两种方式手动加载。
+
+**Q：用 Claude Code 跑，还需要真的打开 NotebookLM / Gemini / Gamma 吗？**
+A：需要。这套流程的核心是 Prompt 逻辑，Claude Code 帮你生成每一步的输入内容，但你还是要把内容粘贴到对应工具里操作。
+
+**Q：可以全自动跑完三步吗？**
+A：目前不行，因为 NotebookLM、Gemini、Gamma 都没有公开 API。Claude Code 负责帮你"想清楚每步该输入什么"，执行还是在你手上。
 
 ---
 
-<div align="center">
+## 这套方法论的演进 · The Evolution
 
-### ⭐ If this saved you a triple-tab afternoon, drop a star.
-### ⭐ 如果帮你省了一下午三标签页接力，点个 star 吧。
+如果你已经熟悉这套三件套，欢迎看看后续两个升级版本——**思路一致，效率不同**：
 
-**Or even better — tell me what your workflow looks like in [Issues](https://github.com/wilingna/ai-ppt-web/issues).**
-**或者更好——在 [Issues](https://github.com/wilingna/ai-ppt-web/issues) 里告诉我你的工作流长什么样。**
+| 版本 | 工具数 | 适合谁 |
+|---|---|---|
+| 🥇 **ai-ppt-toolkit**（本仓库）| 3 个工具 | 想理解"为什么这样做"的人 |
+| 🥈 [**ai-ppt-web**](https://github.com/wilingna/ai-ppt-web) | 1 个网页 + Gamma | 想"快一点"的人 |
+| 🥉 [**PPTFlux**](https://github.com/wilingna/PPTFlux) | 1 个网页全搞定 | 想"一气呵成 + 完全可控"的人 |
 
-</div>
+> 三个仓库可以并存，按你的阶段选。本仓库帮你**理解逻辑**，后两个帮你**提升效率**。
+
+---
+
+## 我的其他项目
+
+- [PPTFlux](https://github.com/wilingna/PPTFlux) — 4 Agent 闭环，资料 → 交互式 HTML 幻灯片
+- [ai-ppt-web](https://github.com/wilingna/ai-ppt-web) — 三件套的网页版升级
+- [ai-decision-5steps](https://github.com/wilingna/ai-decision-5steps) — 用 5 个 AI 工具做高质量决策
+- [ai-content-pipeline](https://github.com/wilingna/ai-content-pipeline) — 7 个 Agent 自动跑内容生产线
+
+---
+
+## License
+
+MIT — 欢迎自由使用、修改、分发
+
+---
+
+*如果这个 Skill 对你有帮助，欢迎 ⭐ Star 支持！*
